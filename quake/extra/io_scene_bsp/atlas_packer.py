@@ -142,11 +142,7 @@ def pack(regions, size=None):
     if not size:
         area = sum([r.size[0] * r.size[1] for r in regions])
         side = 1 << (int(math.sqrt(area)) - 1).bit_length()
-
-        if area * 1.2 < side * side * 0.5:
-            size = side // 2, side
-        else:
-            size = side, side
+        size = side, side
 
     # Sort using area weighted by shortest edge.
     es = enumerate(regions)
@@ -158,7 +154,7 @@ def pack(regions, size=None):
     offsets = []
     count = 0
     for index, image in sorted_es:
-        print('Inserting region {} of {}'.format(count, len(regions)))
+        #print('Inserting region {} of {}'.format(count, len(regions)))
         count += 1
         offset = tree.insert(image)
         offsets.append((index, offset))
